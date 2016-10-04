@@ -8,20 +8,18 @@
 #' @param min_genes an integer, the minimum number of genes from a gene set that must be in the data. Gene sets with fewer genes overlapping with the dataset are dropped.
 #' @param method character, the type of incidence object to return. Either "binary" for a binary matrix or "index" for a list of vector-based indices.
 #' @export
-#' @usage \code{
-#' gene_sets_incMatrix(gene_sets, counts,
-#'                     counts_genes_by="rows",
-#'                     gene_sets_by="rows",
-#'                     min_genes=2,
-#'                     method="binary",
-#'                     verbose=FALSE}
-gene_sets_incMatrix <- function(gene_sets, counts,
-                                counts_genes_by="rows",
-                                gene_sets_by="rows",
-                                min_genes=2,
-                                method="binary",
-                                verbose=FALSE
-) {
+#' @usage \code{gene_sets_incMatrix(
+#' gene_sets, counts,
+#' counts_genes_by="rows",
+#' gene_sets_by="rows",
+#' min_genes=2,
+#' method="binary"}
+gene_sets_incMatrix <- 
+  function(gene_sets, counts,
+           counts_genes_by="rows",
+           gene_sets_by="rows",
+           min_genes=2,
+           method="binary") {
   counts_genes_by <- match.arg(counts_genes_by, choices=c("rows", "columns"))
   gene_sets_by <- match.arg(gene_sets_by, choices=c("rows", "columns"))
   method <- match.arg(method, choices=c("index", "binary"))

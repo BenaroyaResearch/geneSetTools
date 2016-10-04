@@ -2,6 +2,7 @@
 
 export(WGCNAmodulesGeneSetListExactTest)
 export(deduplicate_list_elements)
+export(filter_gene_sets)
 export(geneSetEnrichTerms)
 export(geneSetExactTest)
 export(geneSetListExactTest)
