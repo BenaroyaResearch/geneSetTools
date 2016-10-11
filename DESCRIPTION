@@ -16,6 +16,7 @@ Collate:
     'deduplicate_list_elements.R'
     'filter_gene_sets.R'
     'geneSetEnrichTerms.R'
+    'gene_set_expressed.R'
     'gene_sets_incMatrix.R'
     'read_gmt.R'
     'write_GSEA_counts.R'
