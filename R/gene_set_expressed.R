@@ -7,7 +7,7 @@
 #' @param remove_missing_genes logical, whether to remove genes from the gene sets if the genes are not present in the counts object. Defaults to FALSE.
 #' @param min_genes an integer, the minimum number of genes from a gene set that must be in the data. Gene sets with fewer genes overlapping with the dataset are dropped.
 #' @param min_median_gene_set_expression numeric, the minimum value for median expression of genes in a gene set. Any gene sets with median expression lower than this value are removed.
-#' @seealso filter_gene_sets
+#' @seealso \code{\link{filter_gene_sets}}
 #' @export
 #' @usage \code{gene_set_expressed(
 #'              gene_set, counts,
@@ -21,7 +21,7 @@ gene_set_expressed <-
            counts_genes_by="rows",
            remove_missing_genes=TRUE,
            min_median_gene_expression=1) {
-    if (!(is.vector(gene_set) & is.character(gene_set)))
+    if (!is.character(gene_set))
       stop("Input object gene_set must be a character vector.")
     
     counts_genes_by <- match.arg(counts_genes_by, choices=c("rows", "columns"))

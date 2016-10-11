@@ -31,6 +31,6 @@ A character vector containing the genes that pass the criteria.  May be a zero-l
 This function filters a gene set based on a set of criteria. The standard criterion is median gene expression above a certain threshold, but other functionality may be built in at a later time. It can optionally remove genes not present in the counts object, and/or remove genes from gene sets if their median counts are below a certain threshold.
 }
 \seealso{
-filter_gene_sets
+\code{\link{filter_gene_sets}}
 }
 

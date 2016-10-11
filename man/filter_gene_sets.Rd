@@ -31,12 +31,12 @@
 \item{min_median_gene_set_expression}{numeric, the minimum value for median expression of genes in a gene set. Any gene sets with median expression lower than this value are removed.}
 }
 \value{
-An object of the same class as the input object \code{gene_sets}, with the gene sets that
+An object of the same class as the input object \code{gene_sets}, with the gene sets that meet the thresholds.
 }
 \description{
 This function filters one or more gene sets based on a set of criteria, removing gene sets that do not meet those criteria. The standard criterion is median gene expression above a certain threshold, but other functionality may be built in at a later time. It can optionally remove genes not present in the counts object, and/or remove genes from gene sets if their median counts are below a certain threshold.
 }
 \seealso{
-gene_set_expressed
+\code{\link{gene_set_expressed}}
 }
 

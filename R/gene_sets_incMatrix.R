@@ -18,45 +18,51 @@ gene_sets_incMatrix <-
   function(gene_sets, counts,
            counts_genes_by="rows",
            gene_sets_by="rows",
+           remove_missing_genes=TRUE,
+           remove_low_count_genes=FALSE,
+           min_median_gene_expression=1,
            min_genes=2,
+           min_median_gene_set_expression=1,
            method="binary") {
   counts_genes_by <- match.arg(counts_genes_by, choices=c("rows", "columns"))
   gene_sets_by <- match.arg(gene_sets_by, choices=c("rows", "columns"))
   method <- match.arg(method, choices=c("index", "binary"))
   if (counts_genes_by=="columns") counts <- t(counts)
   
+  ## convert gene sets to a list
   if (is.data.frame(gene_sets) | is.matrix(gene_sets)) {
     if (gene_sets_by=="columns") gene_sets <- t(gene_sets)
-    if (method=="index") {
-      incMatrix <- list()
-      for (i in colnames(gene_sets))
-        incMatrix[[i]] <- na.omit(match(gene_sets[,i]), rownames(counts))
-    } else if (method=="binary") {
-      incMatrix <- t(apply(gene_sets, 1, function(x) {rownames(counts) %in% x}))
-      colnames(incMatrix) <- rownames(counts)
-      incMatrix <- incMatrix + 0
-      incMatrix <- incMatrix[rowSums(incMatrix) >= min_genes,]
-    }
-    
-  } else if (is.list(gene_sets)) {
-  
-    if (method=="index") {
-      incMatrix <- list()
-      for (i in names(gene_sets))
-        incMatrix[[i]] <- na.omit(match(gene_sets[[i]], rownames(counts)))
-    } else if (method=="binary") {
-      incMatrix <- matrix(data=as.logical(NA), nrow=length(gene_sets), ncol=nrow(counts),
-                          dimnames=list(names(gene_sets), rownames(counts)))
-      n_gene_sets <- length(gene_sets)
-      for (i in 1:n_gene_sets) {
-        incMatrix[i,] <- rownames(counts) %in% gene_sets[[i]]
-      }
-      incMatrix <- incMatrix + 0
-      incMatrix <- incMatrix[rowSums(incMatrix) >= min_genes,]
-      
-      if (gene_sets_by=="columns") incMatrix <- t(incMatrix)
-    }
+    gene_sets <- lapply(as.data.frame(gene_sets), na.omit())
   }
+  
+  if (!is.list(gene_sets))
+    stop("Input object 'gene_sets' must be a list, data frame, or matrix.")
+  
+  ## filter out missing genes, low-count genes, and low-count gene sets, as specified
+  gene_sets <-
+    filter_gene_sets(
+      gene_sets, counts,
+      remove_missing_genes=remove_missing_genes,
+      remove_low_count_genes=remove_low_count_genes,
+      min_median_gene_expression=min_median_gene_expression,
+      min_genes=min_genes,
+      min_median_gene_set_expression=min_median_gene_set_expression)
+  
+  if (method=="index") {
+    incMatrix <- list()
+    for (i in names(gene_sets))
+      incMatrix[[i]] <- na.omit(match(gene_sets[[i]], rownames(counts)))
+  } else if (method=="binary") {
+    incMatrix <- matrix(data=as.logical(NA), nrow=length(gene_sets), ncol=nrow(counts),
+                        dimnames=list(names(gene_sets), rownames(counts)))
+    n_gene_sets <- length(gene_sets)
+    for (i in 1:n_gene_sets) {
+      incMatrix[i,] <- rownames(counts) %in% gene_sets[[i]]
+    }
+    incMatrix <- incMatrix + 0
+    incMatrix <- incMatrix[rowSums(incMatrix) >= min_genes,]
     
-  return(incMatrix)
+    if (gene_sets_by=="columns") incMatrix <- t(incMatrix)
+  }
+  incMatrix
 }
