@@ -18,7 +18,7 @@
 
 \item{counts_genes_by}{the dimension of \code{counts} corresponding to genes. Can be "rows" or "columns" or partial matches.}
 
-\item{remove_missing_genes}{logical, whether to remove genes from the gene sets if the genes are not present in the counts object. Defaults to FALSE.}
+\item{remove_missing_genes}{logical, whether to remove genes from the gene sets if the genes are not present in the counts object. Defaults to TRUE.}
 
 \item{min_genes}{an integer, the minimum number of genes from a gene set that must be in the data. Gene sets with fewer genes overlapping with the dataset are dropped.}
 

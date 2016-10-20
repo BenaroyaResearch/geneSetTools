@@ -47,25 +47,26 @@ filter_gene_sets <-
     if (remove_missing_genes)
       gene_sets <- lapply(gene_sets, function(x) x[x %in% rownames(counts)])
     
-    # remove low-count genes if requested
+    ## remove low-count genes from gene sets, if requested
+    # if there are 0-gene sets after this, they will be removed below
     if (remove_low_count_genes)
       gene_sets <- lapply(
         gene_sets, FUN=gene_set_expressed, counts=counts,
         remove_missing_genes=remove_missing_genes,
         min_median_gene_expression=min_median_gene_expression)
     
-    # calculate # of genes present
+    ## calculate # of genes present
     gene_sets.ngenes_present <-
       sapply(gene_sets, function(x) sum(x %in% rownames(counts)))
     gene_sets.median_exp <-
       sapply(gene_sets, function(x) median(counts[na.omit(match(x, rownames(counts))),]))
     
-    # filter gene sets
+    ## remove gene sets with too few genes or median expression too low
     gene_sets <-
       gene_sets[gene_sets.ngenes_present >= min_genes &
                   gene_sets.median_exp >= min_median_gene_set_expression]
     
-    # convert back to original class, and fill in matrix or data.frame with NAs
+    ## convert back to original class, and fill in matrix or data.frame with NAs
     if (class.orig %in% c("matrix", "data.frame")) {
       seq_max <- seq_len(max(sapply(gene_sets, length)))
       gene_sets <- sapply(gene_sets, "[", i=seq_max)
