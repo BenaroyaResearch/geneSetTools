@@ -13,9 +13,9 @@
 
 \item{design}{A data frame containing (at minimum) columns for the sample identifiers and phenotype values.}
 
-\item{var_to_test}{A string, the name of the column in \code{design} that contains the phenotype values. Also added to the output file name.}
+\item{var_to_test}{The name or number of the column in \code{design} that contains the phenotype values. Also added to the output file name.}
 
-\item{libID_col}{Optional, the name or number of the column in \code{design} that contains sample identifiers matching the column names in \code{counts}. If "row.names" is specified, the rownames of \code{design} are used.}
+\item{libID_col}{The name or number of the column in \code{design} that contains sample identifiers matching the column names in \code{counts}. If "row.names" is specified, the rownames of \code{design} are used. Defaults to "lib.id".}
 }
 \description{
 Write out phenotype values to a .cls file, for use with the Java implementation of GSEA. Samples are

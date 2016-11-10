@@ -6,8 +6,8 @@
 #' @param file_prefix A string, the (optional) path and file name to output. The name of the variable, and ".cls" will be appended to this.
 #' @param counts A matrix or data frame, the counts to be used in GSEA, with samples in columns and genes in rows. Should have columns labeled with sample identifiers. Necessary in order to determine the proper order of sample phenotype values in the output file.
 #' @param design A data frame containing (at minimum) columns for the sample identifiers and phenotype values.
-#' @param var_to_test A string, the name of the column in \code{design} that contains the phenotype values. Also added to the output file name.
-#' @param libID_col Optional, the name or number of the column in \code{design} that contains sample identifiers matching the column names in \code{counts}. If "row.names" is specified, the rownames of \code{design} are used.
+#' @param var_to_test The name or number of the column in \code{design} that contains the phenotype values. Also added to the output file name.
+#' @param libID_col The name or number of the column in \code{design} that contains sample identifiers matching the column names in \code{counts}. If "row.names" is specified, the rownames of \code{design} are used. Defaults to "lib.id".
 #' @export
 #' @usage \code{write_cls(file_prefix, counts, design, var_to_test, libID_col="lib.id")}
 write_cls <- function(file_prefix, counts, design, var_to_test, libID_col="lib.id") {
@@ -23,7 +23,7 @@ write_cls <- function(file_prefix, counts, design, var_to_test, libID_col="lib.i
     cat("#", var_to_test, "\n", sep="")
     cat(design[match(colnames(counts), design[,libID_col]), var_to_test]); cat("\n")
   } else {
-    design[,var_to_test] <- factor(design[,var_to_test])
+    design[,var_to_test] <- factor(design[,var_to_test], levels=unique(design[,var_to_test]))
     cat(ncol(counts), length(levels(design[,var_to_test])), "1\n", sep=" ")
     cat("#", levels(design[,var_to_test]), sep=" "); cat("\n")
     cat(as.numeric(design[match(colnames(counts), design[,libID_col]), var_to_test])-1); cat("\n")
