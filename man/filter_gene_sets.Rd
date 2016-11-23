@@ -4,14 +4,13 @@
 \alias{filter_gene_sets}
 \title{Filter gene sets}
 \usage{
-\code{filter_gene_sets(
-             gene_sets, counts,
-             counts_genes_by="rows",
-             remove_missing_genes=TRUE,
-             remove_low_count_genes=FALSE,
-             min_median_gene_expression=1,
-             min_genes=2,
-             min_median_gene_set_expression=1)}
+\code{filter_gene_sets(gene_sets, counts,
+  counts_genes_by="rows",
+  remove_missing_genes=TRUE,
+  remove_low_count_genes=FALSE,
+  min_median_gene_expression=1,
+  min_genes=2,
+  min_median_gene_set_expression=1)}
 }
 \arguments{
 \item{gene_sets}{the gene set(s). Can be one of (1) a single gene set, as character vector, (2) a list of gene sets, with each as a character vector, or (3) a matrix or data frame, with one gene set per column, and the gene set names as column names. Names of list elements or columns are used as gene set names.}

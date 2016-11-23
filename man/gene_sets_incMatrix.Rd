@@ -5,11 +5,11 @@
 \title{Generate a binary incidence matrix for gene sets and counts}
 \usage{
 \code{gene_sets_incMatrix(
-gene_sets, counts,
-counts_genes_by="rows",
-gene_sets_by="rows",
-min_genes=2,
-method="binary"}
+  gene_sets, counts,
+  counts_genes_by="rows",
+  gene_sets_by="rows",
+  min_genes=2,
+  method="binary")}
 }
 \arguments{
 \item{gene_sets}{the gene sets. Either a list of gene sets, with each as a character vector, or a matrix, with one gene set per column, and the gene set names as column names. Names of list elements are used as gene set names.}

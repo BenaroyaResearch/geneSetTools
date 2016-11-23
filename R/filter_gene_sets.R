@@ -11,14 +11,13 @@
 #' @param min_median_gene_set_expression numeric, the minimum value for median expression of genes in a gene set. Any gene sets with median expression lower than this value are removed.
 #' @seealso \code{\link{gene_set_expressed}}
 #' @export
-#' @usage \code{filter_gene_sets(
-#'              gene_sets, counts,
-#'              counts_genes_by="rows",
-#'              remove_missing_genes=TRUE,
-#'              remove_low_count_genes=FALSE,
-#'              min_median_gene_expression=1,
-#'              min_genes=2,
-#'              min_median_gene_set_expression=1)}
+#' @usage \code{filter_gene_sets(gene_sets, counts,
+#'   counts_genes_by="rows",
+#'   remove_missing_genes=TRUE,
+#'   remove_low_count_genes=FALSE,
+#'   min_median_gene_expression=1,
+#'   min_genes=2,
+#'   min_median_gene_set_expression=1)}
 #' @return An object of the same class as the input object \code{gene_sets}, with the gene sets that meet the thresholds. 
 filter_gene_sets <-
   function(gene_sets, counts,
@@ -29,6 +28,7 @@ filter_gene_sets <-
            min_genes=2,
            min_median_gene_set_expression=1) {
     
+    if (is.data.frame(counts)) counts <- as.matrix(counts)
     counts_genes_by <- match.arg(counts_genes_by, choices=c("rows", "columns"))
     if (counts_genes_by=="columns") counts <- t(counts)
     

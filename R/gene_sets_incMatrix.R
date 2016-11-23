@@ -9,11 +9,11 @@
 #' @param method character, the type of incidence object to return. Either "binary" for a binary matrix or "index" for a list of vector-based indices.
 #' @export
 #' @usage \code{gene_sets_incMatrix(
-#' gene_sets, counts,
-#' counts_genes_by="rows",
-#' gene_sets_by="rows",
-#' min_genes=2,
-#' method="binary"}
+#'   gene_sets, counts,
+#'   counts_genes_by="rows",
+#'   gene_sets_by="rows",
+#'   min_genes=2,
+#'   method="binary")}
 gene_sets_incMatrix <- 
   function(gene_sets, counts,
            counts_genes_by="rows",
@@ -32,7 +32,7 @@ gene_sets_incMatrix <-
   ## convert gene sets to a list
   if (is.data.frame(gene_sets) | is.matrix(gene_sets)) {
     if (gene_sets_by=="columns") gene_sets <- t(gene_sets)
-    gene_sets <- lapply(as.data.frame(gene_sets), na.omit())
+    gene_sets <- lapply(as.data.frame(gene_sets), na.omit)
   }
   
   if (!is.list(gene_sets))
