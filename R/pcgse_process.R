@@ -7,7 +7,7 @@
 #' @param sort_by_PC the number of the PC to sort results by
 #' @param gene_sets the gene sets with which PCGSE was run. Used for pulling in the gene set names if they are missing
 #' @export
-#' @usage \code{pcgse_reformat(result, sort_by_PC=1, gene_sets=NULL)}
+#' @usage \code{pcgse_process(result, sort_by_PC=1, gene_sets=NULL)}
 #' @return A data frame, with one row for each gene set, and 3 columns for each PC tested by PCGSE. Columns include the test statistic, the p-value, and the adjsuted p-value.
 pcgse_process <- function(result, sort_by_PC=1, gene_sets=NULL) {
   if (!is.null(gene_sets)) {
