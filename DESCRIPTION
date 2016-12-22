@@ -18,6 +18,7 @@ Collate:
     'geneSetEnrichTerms.R'
     'gene_set_expressed.R'
     'gene_sets_incMatrix.R'
+    'pcgse_reformat.R'
     'read_gmt.R'
     'write_GSEA_counts.R'
     'write_cls.R'

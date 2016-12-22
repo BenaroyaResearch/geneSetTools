@@ -24,8 +24,10 @@ geneSetExactTest <- function(gene_set, gene_list, index, alternative="greater", 
   cont.table[2,2] <- length(intersect(gene_list[index], gene_set))
   
   test <- fisher.test(x=cont.table, alternative=alternative, ...)
-  return(data.frame(p.value = test$p.value,
-                    conf.lower = test$conf.int[1],
-                    conf.upper = test$conf.int[2],
-                    odds_rat.estimate = test$estimate))
+  return(
+    data.frame(
+      p.value = test$p.value,
+      conf.lower = test$conf.int[1],
+      conf.upper = test$conf.int[2],
+      odds_rat.estimate = test$estimate))
 }

@@ -9,12 +9,10 @@
 #' @param min_median_gene_set_expression numeric, the minimum value for median expression of genes in a gene set. Any gene sets with median expression lower than this value are removed.
 #' @seealso \code{\link{filter_gene_sets}}
 #' @export
-#' @usage \code{gene_set_expressed(
-#'              gene_set, counts,
-#'              counts_genes_by="rows",
-#'              remove_missing_genes=TRUE
-#'              min_median_gene_expression=1,
-#' }
+#' @usage \code{gene_set_expressed(gene_set, counts,
+#'   counts_genes_by="rows",
+#'   remove_missing_genes=TRUE,
+#'   min_median_gene_expression=1)}
 #' @return A character vector containing the genes that pass the criteria.  May be a zero-length vector, or identical to the input \code{gene_set} object.
 gene_set_expressed <-
   function(gene_set, counts,

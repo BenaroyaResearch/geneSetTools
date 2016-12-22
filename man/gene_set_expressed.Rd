@@ -4,12 +4,10 @@
 \alias{gene_set_expressed}
 \title{Trim low-count genes from gene sets}
 \usage{
-\code{gene_set_expressed(
-             gene_set, counts,
-             counts_genes_by="rows",
-             remove_missing_genes=TRUE
-             min_median_gene_expression=1,
-}
+\code{gene_set_expressed(gene_set, counts,
+  counts_genes_by="rows",
+  remove_missing_genes=TRUE,
+  min_median_gene_expression=1)}
 }
 \arguments{
 \item{gene_set}{the gene set, as a character vector.}

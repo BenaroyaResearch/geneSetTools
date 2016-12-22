@@ -19,7 +19,12 @@
 #' @usage \code{geneSetListExactTest(gene_sets, gene_list, index,
 #'   alternative="greater", fdr.method="BH", ...)}
 geneSetListExactTest <- function(gene_sets, gene_list, index,
-                                 alternative="greater", fdr.method="BH", ...) {
+                                 alternative="greater", fdr.method="BH",
+                                 sort_var="p.value", ...) {
+  if (!(sort_var %in%
+        c("gene_set", "p.value", "adj.p.value", "conf.lower", "conf.upper", "odds_rat.estimate")) &
+      !(sort_var %in% 1:6))
+    stop("sort_var must be a valid name or number of a column in results.")
   results <- data.frame(gene_set=character(), p.value=numeric(),
                         conf.lower=numeric(), conf.upper=numeric(),
                         odds_rat.estimate=numeric())
@@ -29,6 +34,6 @@ geneSetListExactTest <- function(gene_sets, gene_list, index,
   }
   results$adj.p.value <- p.adjust(results$p.value, method=fdr.method)
   results <- results[,c("gene_set", "p.value", "adj.p.value", "conf.lower", "conf.upper", "odds_rat.estimate")]
-  results <- results[order(results[,"p.value"], decreasing=FALSE),]
+  results <- results[order(results[,sort_var], decreasing=FALSE),]
   return(results)
 }
