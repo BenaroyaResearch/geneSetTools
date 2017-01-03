@@ -79,10 +79,8 @@ barcodeplot_colorless <-
         names(index) <- names(index2) <- names(statistics)
         index[gene.weights12 > 0] <- TRUE
         index2[gene.weights12 < 0] <- TRUE
-        gene.weights1 <- gene.weights12[gene.weights12 > 
-                                          0]
-        gene.weights2 <- gene.weights12[gene.weights12 < 
-                                          0]
+        gene.weights1 <- gene.weights12[gene.weights12 > 0]
+        gene.weights2 <- gene.weights12[gene.weights12 < 0]
         gene.weights <- gene.weights1
       }
     }
@@ -172,8 +170,7 @@ barcodeplot_colorless <-
       if (TWO) {
         col.bars <- c("red", "blue")
         if (WTS) 
-          col.bars.alpha <- c(rgb(1, 0, 0, alpha = ALP), 
-                              rgb(0, 0, 1, alpha = ALP))
+          col.bars.alpha <- c(rgb(1, 0, 0, alpha = ALP), rgb(0, 0, 1, alpha = ALP))
         else col.bars.alpha <- col.bars
       }
       else {
@@ -195,8 +192,7 @@ barcodeplot_colorless <-
         green2 <- RGB[2, 2]
         blue2 <- RGB[3, 2]
         if (WTS) 
-          col.bars.alpha <- c(rgb(red, green, blue, alpha = ALP), 
-                              rgb(red2, green2, blue2, alpha = ALP))
+          col.bars.alpha <- c(rgb(red, green, blue, alpha = ALP), rgb(red2, green2, blue2, alpha = ALP))
         else col.bars.alpha <- col.bars
       }
       else {
@@ -223,12 +219,12 @@ barcodeplot_colorless <-
     if (TWO) 
       ylim[1] <- ylim[1] - 0.5
     if (TWO) 
-      plot(1:n, xlim = c(0, n), ylim = c(ylim.worm[1] - shift, 
-                                         ylim.worm[2] + shift), type = "n", axes = FALSE, 
+      plot(1:n, xlim = c(0, n), 
+           ylim = c(ylim.worm[1] - shift, ylim.worm[2] + shift), type = "n", axes = FALSE, 
            xlab = xlab.worm, ylab = ylab.worm, ...)
     if (!TWO) 
-      plot(1:n, xlim = c(0, n), ylim = c(ylim.worm[1] - shift * 
-                                           (!pos.dir), ylim.worm[2] + shift * pos.dir), type = "n", 
+      plot(1:n, xlim = c(0, n),
+           ylim = c(ylim.worm[1] - shift * (!pos.dir), ylim.worm[2] + shift * pos.dir), type = "n", 
            axes = FALSE, xlab = xlab.worm, ylab = ylab.worm, 
            ...)
     npos <- sum(statistics > quantiles[2])
@@ -244,14 +240,40 @@ barcodeplot_colorless <-
     }
     barlim <- ylim[2] - c(1.5, 0.5)
     if (!pos.dir) {
+      rect.yb <- 0.5
+      rect.yt <- 1
+      rect(0.5, rect.yb, n + 0.5, rect.yt, col = "lightgray", 
+           border = NA)
+      # rect(npos + 0.5, rect.yb, n - nneg + 0.5, rect.yt, col = "lightgray", 
+      #      border = NA)
+      # if (npos) 
+      #   rect(0.5, rect.yb, npos + 0.5, rect.yt, col = "pink", 
+      #        border = NA)
+      # if (nneg) 
+      #   rect(n - nneg + 0.5, rect.yb, n + 0.5, rect.yt, col = "lightblue", 
+      #        border = NA)
       segments(r, barlim[2]/2, r, barlim[2], lwd = lwd, col = col.bars.alpha[1])
-      segments(r, barlim[2]/2 - shift, r, barlim[2]/2 * (1 + 
-                                                           len.up) - shift, lwd = lwd, col = col.bars[1])
+      segments(r, barlim[2]/2 - shift, r, barlim[2]/2 *
+                 (1 + len.up) - shift, lwd = lwd, col = col.bars[1])
     }
     if (pos.dir) {
+      rect.yb <- -0.5
+      if (!TWO) 
+        rect.yb <- 0
+      rect.yt <- 0.5
+      # rect(0.5, rect.yb, n + 0.5, rect.yt, col = "lightgray", 
+      #      border = NA)
+      rect(npos + 0.5, rect.yb, n - nneg + 0.5, rect.yt, col = "gray75",
+           border = NA)
+      if (npos)
+        rect(0.5, rect.yb, npos + 0.5, rect.yt, col = "lightgray",
+             border = NA)
+      if (nneg)
+        rect(n - nneg + 0.5, rect.yb, n + 0.5, rect.yt, col = "lightgray",
+             border = NA)
       segments(r, barlim[1], r, barlim[2]/2, lwd = lwd, col = col.bars.alpha[1])
-      segments(r, barlim[2]/2 + shift, r, barlim[2]/2 * (1 + 
-                                                           len.up) + shift, lwd = lwd, col = col.bars[1])
+      segments(r, barlim[2]/2 + shift, r, barlim[2]/2 *
+                 (1 + len.up) + shift, lwd = lwd, col = col.bars[1])
     }
     if (TWO) {
       barlim2 <- ylim[1] + c(0.5, 1.5)
@@ -269,8 +291,7 @@ barcodeplot_colorless <-
          labels = labels[2], tick = FALSE)
     prob <- (10:0)/10
     axis(at = seq(1, n, len = 11), side = 1, cex.axis = 0.7, 
-         las = 2, labels = format(quantile(statistics, p = prob), 
-                                  digits = 1))
+         las = 2, labels = format(quantile(statistics, p = prob), digits = 1))
     if (worm) {
       rescale <- function(x, newrange, oldrange = range(x)) {
         newrange[1] + (x - oldrange[1])/(oldrange[2] - oldrange[1]) * 
@@ -294,41 +315,34 @@ barcodeplot_colorless <-
       }
       max.worm1 <- max(worm1)
       r.worm1 <- c(0, max.worm1)
-      worm1.scale <- rescale(worm1, newrange = c(1.1 + shift * 
-                                                   pos.dir, 2.1 + shift * pos.dir), oldrange = r.worm1)
+      worm1.scale <- rescale(worm1, newrange = c(1.1 + shift * pos.dir, 2.1 + shift * pos.dir), oldrange = r.worm1)
       if (TWO) {
         min.worm2 <- min(worm2)
         r.worm2 <- c(min.worm2, 0)
-        worm2.scale <- rescale(worm2, newrange = c(-2.1 - 
-                                                     shift, -1.1 - shift), oldrange = r.worm2)
+        worm2.scale <- rescale(worm2, newrange = c(-2.1 - shift, -1.1 - shift), oldrange = r.worm2)
       }
       if (!TWO) {
         lines(x = 1:n, y = worm1.scale, col = col.bars[1], 
               lwd = 2)
-        abline(h = rescale(1, newrange = c(1.1 + shift * 
-                                             pos.dir, 2.1 + shift * pos.dir), oldrange = r.worm1), 
+        abline(h = rescale(1, newrange = c(1.1 + shift * pos.dir, 2.1 + shift * pos.dir),
+                           oldrange = r.worm1), 
                lty = 2)
-        axis(side = 2, at = c(1.1 + shift * pos.dir, 2.1 + 
-                                shift * pos.dir), cex.axis = 0.8, labels = c(0, 
-                                                                             format(max.worm1, digits = 2)))
+        axis(side = 2, at = c(1.1 + shift * pos.dir, 2.1 + shift * pos.dir),
+             cex.axis = 0.8, labels = c(0, format(max.worm1, digits = 2)))
         axis(side = 2, labels = "Enrichment", at = 1.6 + 
                shift * pos.dir, padj = -0.6, tick = FALSE, cex.axis = 0.8)
       }
       if (TWO) {
         lines(x = 1:n, y = worm1.scale, col = col.bars[1], 
               lwd = 2)
-        abline(h = rescale(1, newrange = c(1.1 + shift, 2.1 + 
-                                             shift), oldrange = r.worm1), lty = 2)
+        abline(h = rescale(1, newrange = c(1.1 + shift, 2.1 + shift), oldrange = r.worm1), lty = 2)
         lines(x = 1:n, y = worm2.scale, col = col.bars[2], 
               lwd = 2)
-        abline(h = rescale(-1, newrange = c(-2.1 - shift, 
-                                            -1.1 - shift), oldrange = r.worm2), lty = 2)
+        abline(h = rescale(-1, newrange = c(-2.1 - shift, -1.1 - shift), oldrange = r.worm2), lty = 2)
         axis(side = 2, at = c(1.1 + shift, 2.1 + shift), 
-             cex.axis = 0.7, labels = c(0, format(max.worm1, 
-                                                  digits = 2)))
+             cex.axis = 0.7, labels = c(0, format(max.worm1, digits = 2)))
         axis(side = 2, at = c(-1.1 - shift, -2.1 - shift), 
-             cex.axis = 0.7, labels = c(0, format(-min.worm2, 
-                                                  digits = 2)))
+             cex.axis = 0.7, labels = c(0, format(-min.worm2, digits = 2)))
         axis(side = 2, labels = "Enrichment", at = 1.6 + 
                shift, tick = FALSE, padj = -0.6, cex.axis = 0.7)
         axis(side = 2, labels = "Enrichment", at = -1.6 - 
@@ -339,15 +353,13 @@ barcodeplot_colorless <-
       if (!TWO) {
         if (pos.dir) {
           axis(side = 2, at = c(0.5 + shift, 1 + shift), 
-               cex.axis = 0.48, padj = 1.6, labels = c(0, 
-                                                       format(max(set1$weight[r]), digits = 2)))
+               cex.axis = 0.48, padj = 1.6, labels = c(0, format(max(set1$weight[r]), digits = 2)))
           axis(side = 2, labels = weights.label[1], at = 0.75 + 
                  shift, padj = 1, tick = FALSE, cex.axis = 0.5)
         }
         if (!pos.dir) {
           axis(side = 2, at = c(0 - shift, 0.5 - shift), 
-               cex.axis = 0.48, padj = 1.6, labels = c(format(min(set1$weight[r]), 
-                                                              digits = 2), 0))
+               cex.axis = 0.48, padj = 1.6, labels = c(format(min(set1$weight[r]), digits = 2), 0))
           axis(side = 2, labels = weights.label[1], at = 0.25 - 
                  shift, padj = 1, tick = FALSE, cex.axis = 0.5)
         }
@@ -360,8 +372,8 @@ barcodeplot_colorless <-
         axis(side = 2, labels = weights.label[1], at = 0.75 + 
                shift, padj = 1, tick = FALSE, cex.axis = 0.46)
         axis(side = 2, at = c(-0.5 - shift, -1 - shift), 
-             cex.axis = 0.43, labels = c(0, format(-max.weight, 
-                                                   digits = 2, scientific = FALSE)), padj = 1.6)
+             cex.axis = 0.43,
+             labels = c(0, format(-max.weight, digits = 2, scientific = FALSE)), padj = 1.6)
         axis(side = 2, labels = weights.label[1], at = -0.75 - 
                shift, padj = 1, tick = FALSE, cex.axis = 0.46)
       }
