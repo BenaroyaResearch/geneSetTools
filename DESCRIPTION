@@ -13,6 +13,7 @@ Collate:
     'geneSetExactTest.R'
     'geneSetListExactTest.R'
     'WGCNAmodulesGeneSetListExactTest.R'
+    'barcodeplot_colorless.R'
     'deduplicate_list_elements.R'
     'filter_gene_sets.R'
     'geneSetEnrichTerms.R'
