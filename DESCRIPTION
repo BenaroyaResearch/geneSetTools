@@ -18,6 +18,7 @@ Collate:
     'filter_gene_sets.R'
     'geneSetEnrichTerms.R'
     'gene_set_expressed.R'
+    'gene_set_median_zscore.R'
     'gene_sets_incMatrix.R'
     'pcgse_process.R'
     'read_gmt.R'
