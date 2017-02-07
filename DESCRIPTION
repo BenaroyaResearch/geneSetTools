@@ -1,6 +1,6 @@
 Package: geneSetTools
 Title: Simplify gene set analysis of RNAseq data.
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: person("Matthew", "Dufort", email = "matt.dufort@gmail.com", role = c("aut", "cre"))
 Description: This package contains functions to conduct basic gene set analyses,
     and to streamline other gene set analysis methods.
@@ -18,6 +18,8 @@ Collate:
     'filter_gene_sets.R'
     'geneSetEnrichTerms.R'
     'gene_set_expressed.R'
+    'gene_set_median_mad_score.R'
+    'gene_set_median_percrank.R'
     'gene_set_median_zscore.R'
     'gene_sets_incMatrix.R'
     'pcgse_process.R'
