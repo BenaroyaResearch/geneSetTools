@@ -18,6 +18,7 @@ Collate:
     'filter_gene_sets.R'
     'geneSetEnrichTerms.R'
     'gene_set_expressed.R'
+    'gene_set_median_count.R'
     'gene_set_median_mad_score.R'
     'gene_set_median_percrank.R'
     'gene_set_median_zscore.R'
