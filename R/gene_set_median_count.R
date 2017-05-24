@@ -49,7 +49,7 @@ gene_set_median_count <-
         counts
     } else {
       median_counts <-
-        apply(counts, MARGIN=1, median)
+        apply(counts, MARGIN=2, median)
     }
     
     median_counts
