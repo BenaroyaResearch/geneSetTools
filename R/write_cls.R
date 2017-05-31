@@ -11,6 +11,9 @@
 #' @export
 #' @usage \code{write_cls(file_prefix, counts, design, var_to_test, libID_col="lib.id")}
 write_cls <- function(file_prefix, counts, design, var_to_test, libID_col="lib.id") {
+  
+  counts <- extract_counts(counts)
+  
   if (is.matrix(design)) design <- as.data.frame(design)
   if (libID_col == "row.names" & !("row.names" %in% colnames(design))) design$row.names <- rownames(design)
   if (!(libID_col %in% colnames(design))) stop(paste0("Design object is missing column ", libID_col, ", where I expected to find library identifiers."))
