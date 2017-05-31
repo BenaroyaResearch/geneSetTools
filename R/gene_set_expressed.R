@@ -8,6 +8,7 @@
 #' @param min_genes an integer, the minimum number of genes from a gene set that must be in the data. Gene sets with fewer genes overlapping with the dataset are dropped.
 #' @param min_median_gene_set_expression numeric, the minimum value for median expression of genes in a gene set. Any gene sets with median expression lower than this value are removed.
 #' @seealso \code{\link{filter_gene_sets}}
+#' @import countSubsetNorm
 #' @export
 #' @usage \code{gene_set_expressed(gene_set, counts,
 #'   counts_genes_by="rows",
