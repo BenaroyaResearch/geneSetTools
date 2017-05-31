@@ -13,7 +13,7 @@
 \arguments{
 \item{gene_set}{the gene set, as a character vector.}
 
-\item{counts}{a matrix or data frame of counts. The dimension corresponding to genes must have dimnames, which will be matched to the gene identifiers in \code{gene_sets}.}
+\item{counts}{a matrix or data frame of counts, or an object from which counts can be extracted. The dimension corresponding to genes must have dimnames, which will be matched to the gene identifiers in \code{gene_sets}.}
 
 \item{counts_genes_by}{the dimension of \code{counts} corresponding to genes. Can be "rows" or "columns" or partial matches.}
 

@@ -4,7 +4,7 @@
 \alias{geneSetExactTest}
 \title{Calculate Fisher's exact test statistics for a gene set in a subset of a gene list}
 \usage{
-\code{geneSetExactTest(ene_set, gene_list, index, alternative="greater", ...)}
+\code{geneSetExactTest(gene_set, gene_list, index, alternative="greater", ...)}
 }
 \arguments{
 \item{gene_set}{a character vector, the names of the genes in the gene set.}

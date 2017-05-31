@@ -2,7 +2,7 @@
 #' 
 #' This function determines the patient-level median percentile rank of a set of genes, centered on the median and scaled by the median absolute deviation (MAD). Counts of each gene are first converted to percentile ranks, then the median value for each patient is calculated.
 #' @param gene_set the gene set, as a character vector.
-#' @param counts a matrix or data frame of counts. The dimension corresponding to genes must have dimnames, which will be matched to the gene identifiers in \code{gene_sets}.
+#' @param counts a matrix or data frame of counts, or an object from which counts can be extracted. The dimension corresponding to genes must have dimnames, which will be matched to the gene identifiers in \code{gene_sets}.
 #' @param counts_genes_by the dimension of \code{counts} corresponding to genes. Can be "rows" or "columns" or partial matches.
 #' @param remove_missing_genes logical, whether to remove genes from the gene sets if the genes are not present in the counts object. Defaults to TRUE.
 #' @param remove_low_count_genes logical, whether to remove genes from the gene sets if the median expression level is below a threshold.  Implemented by a call to \code{gene_set_expressed}.
@@ -22,6 +22,8 @@ gene_set_median_percrank <-
            ...) {
     if (!is.character(gene_set))
       stop("Input object gene_set must be a character vector.")
+    
+    counts <- extract_counts(counts)
     
     ## rotate matrix if needed
     counts_genes_by <- match.arg(counts_genes_by, choices=c("rows", "columns"))

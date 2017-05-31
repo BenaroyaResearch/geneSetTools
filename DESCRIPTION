@@ -4,6 +4,8 @@ Version: 0.0.0.9001
 Authors@R: person("Matthew", "Dufort", email = "matt.dufort@gmail.com", role = c("aut", "cre"))
 Description: This package contains functions to conduct basic gene set analyses,
     and to streamline other gene set analysis methods.
+Imports:
+	countSubsetNorm
 Depends:
     R (>= 3.2.2)
 License: GPL-3

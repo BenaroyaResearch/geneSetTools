@@ -9,7 +9,7 @@
 \arguments{
 \item{filename}{A string, the name of the file to output}
 
-\item{counts}{A matrix or data frame, the counts to be used in GSEA, with samples in columns and genes in rows. Should have rows labeled with gene identifiers.}
+\item{counts}{A matrix or data frame of counts, or an object from which counts can be extracted. Should have samples in columns and genes in rows, and rows labeled with gene identifiers.}
 }
 \description{
 Write out expression counts to a .txt file, for use with the Java implementation of GSEA. This function

@@ -13,7 +13,7 @@
 #' @param ... optional arguments to be passed to \code{fisher.test}
 #' @export
 #' @return A data frame with a single row, containing the p-value, the upper and lower confidence intervals, and the estimated odds ratio.
-#' @usage \code{geneSetExactTest(ene_set, gene_list, index, alternative="greater", ...)}
+#' @usage \code{geneSetExactTest(gene_set, gene_list, index, alternative="greater", ...)}
 geneSetExactTest <- function(gene_set, gene_list, index, alternative="greater", ...) {
   if (is.logical(index)) index <- which(index)
   
