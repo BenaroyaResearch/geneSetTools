@@ -6,7 +6,7 @@
 #' extracts terms related to those gene sets from a data frame describing the gene sets.
 #' @param results the output from a gene set analysis (e.g. roast, mroast, camera, gene)
 #' @param gene_set_df a data frame containing the details of the gene set annotations.
-#' @param method a string, the method used to run the gene set analysis. This provides the function with the expected structure of \code{results}, so that various other parameters do not need to be specified. Current options include "camera", "mroast", "geneSetListExactTest", and "WGCNAmodulesgeneSetListExactTest
+#' @param method a string, the method used to run the gene set analysis. This provides the function with the expected structure of \code{results}, so that various other parameters do not need to be specified. Current options include "camera", "mroast", "gene_set_list_exact_test", and "WGCNA_modules_gene_set_list_exact_test
 #' @param results.name_col name or number of the column of \code{results} containing the gene set names. If gene set names are the row names, specify "rownames".
 #' @param results.sig_col name or number of the column of \code{results} containing the gene set significance numbers.
 #' @param results.direction_col name number of the column of \code{results} containing the direction (Up/Down).
@@ -18,44 +18,47 @@
 #' @export
 #' @return A data frame (or list of data frames, one for each direction) containing the names of the enriched gene sets and the terms or description associated with each gene set.
 #' @usage \code{
-#' geneSetEnrichTerms(results, gene_set_df, method=NULL, 
-#'                    results.name_col=NULL, results.sig_col=NULL, results.direction_col=NULL,
-#'                    gene_set_df.name_col, gene_set_df.terms_col,
-#'                    threshold=0.01, direction=NULL)}
-geneSetEnrichTerms <- function(results, gene_set_df, method=NULL, 
-                               results.name_col=NULL, results.sig_col=NULL, results.direction_col=NULL,
-                               gene_set_df.name_col, gene_set_df.terms_col,
-                               threshold=0.01, direction=NULL) {
-  if (is.null(method) &
-      (is.null(results.name_col) | is.null(results.sig_col) | is.null(results.direction_col)))
-    stop("Must provide either 'method' or all column specifiers for 'results'")
-  
-  if (method %in% c("camera", "mroast")) {
-    if (is.null(results.name_col)) results.name_col <- "rownames"
-    if (is.null(results.sig_col)) results.sig_col <- "FDR"
-    if (is.null(results.direction_col)) results.direction_col <- "Direction"
-  } else if (method == "geneSetListExactTest") {
-    if (is.null(results.name_col)) results.name_col <- "gene_set"
-    if (is.null(results.sig_col)) results.sig_col <- "adj.p.value"
-  } else if (method == "WGCNAmodulesGeneSetListExactTest") {
-    # rerun geneSetEnrichTerms for each module, and return a list with results for each module
-    output <- list()
-    for (i in unique(results[["module"]])) {
-      output[[i]] <-
-        geneSetEnrichTerms(results[results[["module"]]==i,],
-                           gene_set_df=gene_set_df, method="geneSetListExactTest",
-                           gene_set_df.name_col=gene_set_df.name_col,
-                           gene_set_df.terms_col=gene_set_df.terms_col,
-                           results.name_col=results.name_col,
-                           results.sig_col=results.sig_col,
-                           threshold=threshold)
+#' gene_set_enrich_terms(
+#'   results, gene_set_df, method=NULL, 
+#'   results.name_col=NULL, results.sig_col=NULL, results.direction_col=NULL,
+#'   gene_set_df.name_col, gene_set_df.terms_col,
+#'   threshold=0.01, direction=NULL)}
+gene_set_enrich_terms <-
+  function(results, gene_set_df, method=NULL, 
+           results.name_col=NULL, results.sig_col=NULL, results.direction_col=NULL,
+           gene_set_df.name_col, gene_set_df.terms_col,
+           threshold=0.01, direction=NULL) {
+    if (is.null(method) &
+        (is.null(results.name_col) | is.null(results.sig_col) | is.null(results.direction_col)))
+      stop("Must provide either 'method' or all column specifiers for 'results'")
+    
+    if (method %in% c("camera", "mroast")) {
+      if (is.null(results.name_col)) results.name_col <- "rownames"
+      if (is.null(results.sig_col)) results.sig_col <- "FDR"
+      if (is.null(results.direction_col)) results.direction_col <- "Direction"
+    } else if (method == "gene_set_list_exact_test") {
+      if (is.null(results.name_col)) results.name_col <- "gene_set"
+      if (is.null(results.sig_col)) results.sig_col <- "adj.p.value"
+    } else if (method == "WGCNA_modules_gene_set_list_exact_test") {
+      # rerun gene_set_enrich_terms for each module, and return a list with results for each module
+      output <- list()
+      for (i in unique(results[["module"]])) {
+        output[[i]] <-
+          gene_set_enrich_terms(
+            results[results[["module"]]==i,],
+            gene_set_df=gene_set_df, method="gene_set_list_exact_test",
+            gene_set_df.name_col=gene_set_df.name_col,
+            gene_set_df.terms_col=gene_set_df.terms_col,
+            results.name_col=results.name_col,
+            results.sig_col=results.sig_col,
+            threshold=threshold)
+      }
+      return(output)
     }
-    return(output)
-  }
-  
-  if (results.name_col %in% c("rownames", "row.names"))
-    results[,results.name_col] <- rownames(results)
-  if (gene_set_df.name_col %in% c("rownames", "row.names"))
+    
+    if (results.name_col %in% c("rownames", "row.names"))
+      results[,results.name_col] <- rownames(results)
+    if (gene_set_df.name_col %in% c("rownames", "row.names"))
     gene_set_df[,gene_set_df.name_col] <- rownames(gene_set_df)
   
   if (is.null(direction)) {

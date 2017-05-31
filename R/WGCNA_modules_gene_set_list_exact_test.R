@@ -2,11 +2,11 @@
 #'
 #' Calculate Fisher's exact test statistics for a list of gene sets in WGCNA modules, versus the 
 #' background of the full list of genes that the WGCNA modules were constructed from. i.e. test if 
-#' each gene set is enriched in each module. It is a wrapper for geneSetListExactTest, with multiple 
+#' each gene set is enriched in each module. It is a wrapper for gene_set_list_exact_test, with multiple 
 #' subsets of the full gene list. This tests against the null hypothesis of even distribution of the
 #' contingency table; the test statistic is compared to a hypergeometric distribution. By default, it
 #' tests for positive enrichment (genes in the gene set found more often in the subset than expected).
-#' @include geneSetListExactTest.R
+#' @include gene_set_list_exact_test.R
 #' @param gene_sets a list of character vectors, each vector containing the names of the genes in a single gene set.
 #' @param gene_modules a data frame containing gene names ("gene"), WGCNA modules ("color_assigned"), and connectivity to the assigned module ("kME_color_assigned"). It should contain all genes included in the module construction, as the full set in \code{gene_modules} is used as the background.
 #' @param threshold a scalar, the value of kME to use as a threshold for inclusion of genes in WGCNA modules. Genes with connectivity below this value are considered to NOT be members of the modules; they are included in the background list. Based on some minimal testing, threshold does not seem to have a huge effect on which gene sets are near the top of the list, but it does affect how many gene sets are found significant.
@@ -18,10 +18,10 @@
 #' @param ... optional arguments to be passed to \code{fisher.test}.
 #' @export
 #' @return Either a data frame with a row for each combination of module and gene set; or a list of data frames, one for module, with each containing rows for the results of each gene set tested. In either case, the data frame(s) contain(s) the name of the gene set, the p-value, the upper and lower confidence intervals, and the estimated odds ratio.
-#' @usage \code{WGCNAmodulesGeneSetListExactTest(gene_sets, gene_modules, threshold=0.75,
+#' @usage \code{WGCNA_modules_gene_set_list_exact_test(gene_sets, gene_modules, threshold=0.75,
 #'   alternative="greater", fdr.method="BH", p.adjust_set="all",
 #'   return_format="df", return_sort="p.value", ...)}
-WGCNAmodulesGeneSetListExactTest <-
+WGCNA_modules_gene_set_list_exact_test <-
   function(gene_sets, gene_modules, threshold=0.75,
            alternative="greater", fdr.method="BH", p.adjust_set="all",
            return_format="df", return_sort="p.value", ...) {
@@ -34,7 +34,7 @@ WGCNAmodulesGeneSetListExactTest <-
       index.tmp <- (gene_modules$color_assigned==i &
                       gene_modules$kME_color_assigned >= threshold)
       results.tmp <-
-        geneSetListExactTest(gene_sets, gene_list=gene_modules$gene,
+        gene_set_list_exact_test(gene_sets, gene_list=gene_modules$gene,
                              index=index.tmp, ...)
       results <- rbind(results, cbind(rep(i,nrow(results.tmp)), results.tmp))
     }
