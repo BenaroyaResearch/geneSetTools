@@ -31,4 +31,3 @@ This function filters a gene set based on a set of criteria. The standard criter
 \seealso{
 \code{\link{filter_gene_sets}}
 }
-

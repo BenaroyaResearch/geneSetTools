@@ -38,4 +38,3 @@ subsets of the full gene list. This tests against the null hypothesis of even di
 contingency table; the test statistic is compared to a hypergeometric distribution. By default, it
 tests for positive enrichment (genes in the gene set found more often in the subset than expected).
 }
-

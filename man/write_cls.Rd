@@ -22,4 +22,3 @@ Write out phenotype values to a .cls file, for use with the Java implementation 
 output in the order they are found in an associated counts object so that they are properly associated
 in GSEA.
 }
-

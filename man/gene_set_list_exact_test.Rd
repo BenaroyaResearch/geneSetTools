@@ -32,4 +32,3 @@ differential expression, etc. This tests against the null hypothesis of even dis
 contingency table; the test statistic is compared to a hypergeometric distribution. By default, it
 tests for positive enrichment (genes in the gene set found more often in the subset than expected).
 }
-

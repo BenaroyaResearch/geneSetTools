@@ -1,6 +1,6 @@
 Package: geneSetTools
 Title: Simplify gene set analysis of RNAseq data.
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: person("Matthew", "Dufort", email = "matt.dufort@gmail.com", role = c("aut", "cre"))
 Description: This package contains functions to conduct basic gene set analyses,
     and to streamline other gene set analysis methods.
@@ -10,7 +10,7 @@ Depends:
     R (>= 3.2.2)
 License: GPL-3
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Collate:
     'gene_set_exact_test.R'
     'gene_set_list_exact_test.R'

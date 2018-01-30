@@ -38,4 +38,3 @@ This function filters one or more gene sets based on a set of criteria, removing
 \seealso{
 \code{\link{gene_set_expressed}}
 }
-

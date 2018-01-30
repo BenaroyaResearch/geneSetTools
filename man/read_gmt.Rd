@@ -21,4 +21,3 @@
 This function reads a gene set in .gmt file format into a list. By default, it uses the first
 element of each gene set as the name, and assumes the first gene in each set is the third element.
 }
-

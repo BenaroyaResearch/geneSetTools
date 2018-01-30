@@ -17,4 +17,3 @@ Plot the gene statistics of a set of genes on a barcode plot. This is a modified
 limma::barcodeplot that drops the pink and blue colors in the limma version. For documentation, see
 limma::barcodeplot.
 }
-

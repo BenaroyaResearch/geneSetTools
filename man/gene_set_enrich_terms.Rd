@@ -41,4 +41,3 @@ significantly up or down in a gene set analysis. Basically, it takes the output 
 analysis, identifies gene sets that are significantly up and/or down in the that analysis, and
 extracts terms related to those gene sets from a data frame describing the gene sets.
 }
-

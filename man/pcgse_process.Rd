@@ -21,4 +21,3 @@ This function reformats the output of PCGSE, allowing for easier viewing of the 
 adjusted p-values, and converts the list into a data frame with the gene set, test statistics, p-values, and
 adjusted p-values as columns.
 }
-

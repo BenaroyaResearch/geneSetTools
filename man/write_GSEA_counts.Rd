@@ -15,4 +15,3 @@
 Write out expression counts to a .txt file, for use with the Java implementation of GSEA. This function
 formats the output to match the .txt counts file format used by GSEA.
 }
-

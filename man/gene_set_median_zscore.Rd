@@ -29,4 +29,3 @@ A numeric vector containing the median values, with one element for each library
 \description{
 This function determines the patient-level median z-score of a set of genes. Counts of each gene are first converted to z-scores, then the median value for each patient is calculated.
 }
-

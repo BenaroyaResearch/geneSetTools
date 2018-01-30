@@ -30,4 +30,3 @@ A numeric vector containing the median values, with one element for each library
 \description{
 This function determines the patient-level median count of a set of genes.
 }
-

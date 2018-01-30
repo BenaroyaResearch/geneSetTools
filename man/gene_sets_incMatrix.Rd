@@ -27,4 +27,3 @@
 \description{
 This function creates a binary or index-based gene set incidence matrix. It expects gene sets as named lists of character vectors.
 }
-

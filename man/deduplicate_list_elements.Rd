@@ -22,4 +22,3 @@ and the algorithm moves to the next vector. This continues until no elements are
 one of the vectors in the list. It is used in the context of gene set analyses to remove genes that
 are duplicated across multiple gene sets, so that the gene sets are non-overlapping.
 }
-
